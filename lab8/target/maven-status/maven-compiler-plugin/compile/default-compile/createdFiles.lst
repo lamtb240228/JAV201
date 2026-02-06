@@ -1,0 +1,6 @@
+com\poly\Bai3\Message.class
+com\poly\Bai3\MessageDecoder.class
+com\poly\Bai3\MessageEncoder.class
+com\poly\TextChatServerEndpoint.class
+com\poly\Bai3\ChatServerEndpoint.class
+com\poly\XJPA.class

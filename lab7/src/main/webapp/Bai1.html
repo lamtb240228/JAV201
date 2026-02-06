@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bài 1 - Fetch API</title>
+</head>
+<body>
+    <h1>Bài 1: Fetch API - Lấy dữ liệu JSON từ Servlet</h1>
+    <button onclick="loadEmployee()">Load Employee Data</button>
+    <p>Xem console (F12) để xem kết quả JSON</p>
+    
+    <script>
+        function loadEmployee() {
+            var url = "http://localhost:8080/lab7/api/employee";
+            
+            fetch(url, {method: "GET"})
+                .then(resp => resp.json())
+                .then(json => {
+                    console.log("Dữ liệu JSON nhận được:", json);
+                    console.log("Mã NV:", json.manv);
+                    console.log("Họ tên:", json.hoTen);
+                    console.log("Giới tính:", json.gioiTinh ? "Nam" : "Nữ");
+                    console.log("Lương:", json.luong);
+                });
+        }
+        
+        // Load tự động khi trang vào
+        window.onload = function() {
+            loadEmployee();
+        }
+    </script>
+</body>
+</html>

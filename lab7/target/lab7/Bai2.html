@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bài 2 - File Upload</title>
+</head>
+<body>
+    <h1>Bài 2: Upload File với Fetch API</h1>
+    
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile()">Upload</button>
+    <p id="result"></p>
+    
+    <script>
+        function uploadFile() {
+            var fileInput = document.getElementById("fileInput");
+            var file = fileInput.files[0];
+            
+            if (!file) {
+                alert("Vui lòng chọn file!");
+                return;
+            }
+            
+            var formData = new FormData();
+            formData.append("file", file);
+            
+            var url = "http://localhost:8080/lab7/api/upload";
+            
+            fetch(url, {
+                method: "POST",
+                body: formData
+            })
+            .then(resp => resp.json())
+            .then(json => {
+                console.log("Dữ liệu file upload:", json);
+                console.log("Tên file:", json.name);
+                console.log("Loại file:", json.type);
+                console.log("Kích thước:", json.size + " bytes");
+                
+                // Hiển thị kết quả
+                document.getElementById("result").innerHTML = 
+                    `<strong>Upload thành công!</strong><br>
+                     Tên: ${json.name}<br>
+                     Loại: ${json.type}<br>
+                     Kích thước: ${json.size} bytes`;
+            })
+            .catch(err => console.error("Lỗi:", err));
+        }
+    </script>
+</body>
+</html>
